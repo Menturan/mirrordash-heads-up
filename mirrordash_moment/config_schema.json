@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Moment",
+  "description": "A short text in the centre of the mirror for a moment, sent by your home automation: someone at the door, the laundry is done.",
+  "type": "object",
+  "properties": {
+    "duration": {
+      "type": "integer",
+      "format": "slider",
+      "minimum": 3,
+      "maximum": 120,
+      "default": 15,
+      "title": "Seconds Shown",
+      "description": "How long a text stays on the mirror before it fades away. A new text starts the time again."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["normal", "large"],
+      "enum_titles": ["Normal", "Large"],
+      "default": "normal",
+      "title": "Text Size",
+      "description": "Long texts are set a little smaller so they fit."
+    }
+  },
+  "exposes": {
+    "moment": {"type": "text", "title": "Moment", "maxLength": 255, "control": true}
+  }
+}

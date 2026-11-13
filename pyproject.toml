@@ -1,0 +1,30 @@
+[project]
+name = "mirrordash-moment"
+version = "0.1.0"
+description = "A short text in the centre of the mirror for a moment, sent by your home automation: someone at the door, the laundry is done."
+requires-python = ">=3.14"
+license = "MIT"  # LICENSE: yours to change; the template it came from asks nothing (MIT-0)
+license-files = ["LICENSE"]
+authors = [
+    { name = "Menturan" }
+]
+# The mirror provides the rest (rendering, fetch_json/fetch, translations, fastapi); add only what else
+# plugin.py imports
+dependencies = []
+
+[project.entry-points."mirrordash.modules"]
+mirrordash_moment = "mirrordash_moment.plugin:MomentModule"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "jinja2>=3.1",  # the mirror's template engine: the test renders the real template to prove it escapes
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["mirrordash_moment"]
