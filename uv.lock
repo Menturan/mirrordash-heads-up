@@ -111,7 +111,7 @@ wheels = [
 ]
 
 [[package]]
-name = "mirrordash-moment"
+name = "mirrordash-heads-up"
 version = "1.0.0"
 source = { editable = "." }
 

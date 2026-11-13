@@ -1,6 +1,6 @@
-# mirrordash-moment
+# mirrordash-heads-up
 
-A short text in the centre of the mirror for a moment, sent by your home automation: "Someone is at the door",
+A short text in the centre of the mirror for a few seconds, sent by your home automation: "Someone is at the door",
 "The laundry is done", "The bus leaves in 6 minutes". It fades in, stays for a few seconds and fades away; the rest of
 the time the card is empty and the mirror is a mirror.
 
@@ -11,12 +11,12 @@ the time the card is empty and the mirror is a mirror.
 1. Install the module from **Admin → Modules** and turn it on.
 2. Put it in the centre (`middle_center`), in a spot of its own: the text is large and meant to be alone there.
    (A module cannot choose its own place, so the position is yours to set.)
-3. Turn on MQTT control for the instance: **Admin → Settings → MQTT**, share the *Moment* module and allow it to
-   be controlled. Home Assistant then gets a text entity, `text.<mirror>_moment_moment` (the exact name is shown in
+3. Turn on MQTT control for the instance: **Admin → Settings → MQTT**, share the *Heads-up* module and allow it to
+   be controlled. Home Assistant then gets a text entity, `text.<mirror>_heads_up_heads_up` (the exact name is shown in
    Home Assistant under the mirror's device).
 4. Optional, in the module's settings: **Seconds Shown** (3 to 120, default 15) and **Text Size** (Normal or Large).
 
-## Send a moment from Home Assistant
+## Send a heads-up from Home Assistant
 
 ```yaml
 automation:
@@ -28,7 +28,7 @@ automation:
     actions:
       - action: text.set_value
         target:
-          entity_id: text.mirror_moment_moment
+          entity_id: text.mirror_heads_up_heads_up
         data:
           value: "Someone is at the door"
 ```
@@ -42,10 +42,10 @@ automation:
 
 - **A text is at most 255 characters**: that is the platform's limit for a text entity, and what Home Assistant
   allows here.
-- **A moment that arrives while the screen is resting is shown on a dark screen**, and is gone when someone
+- **A heads-up that arrives while the screen is resting is shown on a dark screen**, and is gone when someone
   arrives: a module cannot wake the screen, and the time runs out while it sleeps.
-- One moment at a time: no queue, no history, no priorities, no colours or sounds.
-- With a mirror that reloads its screen (a restart of the screen, a new browser connection) a moment still showing is
+- One heads-up at a time: no queue, no history, no priorities, no colours or sounds.
+- With a mirror that reloads its screen (a restart of the screen, a new browser connection) a heads-up still showing is
   drawn again from its start, so it can stay a few seconds longer than set.
 
 ## Develop

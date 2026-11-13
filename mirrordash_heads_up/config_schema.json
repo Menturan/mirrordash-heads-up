@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Moment",
-  "description": "A short text in the centre of the mirror for a moment, sent by your home automation: someone at the door, the laundry is done.",
+  "title": "Heads-up",
+  "description": "A short text in the centre of the mirror for a few seconds, sent by your home automation: someone at the door, the laundry is done.",
   "type": "object",
   "properties": {
     "duration": {
@@ -23,6 +23,6 @@
     }
   },
   "exposes": {
-    "moment": {"type": "text", "title": "Moment", "maxLength": 255, "control": true}
+    "heads_up": {"type": "text", "title": "Heads-up", "maxLength": 255, "control": true}
   }
 }
