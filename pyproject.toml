@@ -20,6 +20,7 @@ dev = [
     "pytest>=8.0",
     "pytest-asyncio>=0.23",
     "jinja2>=3.1",  # the mirror's template engine: the test renders the real template to prove it escapes
+    "fastapi>=0.115",  # the mirror's, for the tests of the web address
 ]
 
 [build-system]
