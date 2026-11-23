@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Heads-up",
+  "requires_mirrordash": "0.14",
   "description": "A short text in the centre of the mirror for a few seconds: someone at the door, the laundry is done. It can come from your home automation, a web call, another module, a schedule or a watched web address.",
   "type": "object",
   "properties": {
