@@ -2,7 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Heads-up",
   "requires_mirrordash": "0.14",
-  "description": "A short text in the centre of the mirror for a few seconds: someone at the door, the laundry is done. It can come from your home automation, a web call, another module, a schedule or a watched web address.",
+  "description": "A short text in the centre of the mirror for a few seconds: someone at the door, the laundry is done.",
+  "help": "It can come from your home automation, a web call, another module, a schedule or a watched web address.",
   "type": "object",
   "properties": {
     "duration": {
@@ -28,21 +29,24 @@
       "maximum": 72,
       "default": 12,
       "title": "Hours a Waiting Heads-up Is Kept",
-      "description": "A text waits its turn while another shows or while the mirror's screen is off. One that has waited longer than this is dropped instead of shown."
+      "description": "How long a waiting text is kept before it is dropped.",
+      "help": "A text waits its turn while another shows or while the mirror's screen is off. One that has waited longer than this is dropped instead of shown."
     },
     "token": {
       "type": "string",
       "format": "password",
       "default": "",
       "title": "Token",
-      "description": "Optional. Empty: anyone on your home network can send a heads-up to http://mirrordash.local/api/modules/<name>/show (the name is shown on this module's card in the admin). With a token set, every call must carry it, in an X-Token header or a token address parameter.",
+      "description": "Optional password for sending heads-ups. Empty: anyone on your home network can send one.",
+      "help": "Empty: anyone on your home network can send a heads-up to http://mirrordash.local/api/modules/<name>/show (the name is shown on this module's card in the admin). With a token set, every call must carry it, in an X-Token header or a token address parameter.",
       "group": "From the Web"
     },
     "senders": {
       "type": "array",
       "default": [],
       "title": "Modules That May Send",
-      "description": "Other modules whose heads-ups are shown. Add each one's package name, for example mirrordash_now_playing_spotify; that module must be installed and set to send. It sends the event <package name>.heads_up.",
+      "description": "Other modules whose heads-ups are shown, by package name.",
+      "help": "Add each one's package name, for example mirrordash_now_playing_spotify; that module must be installed and set to send. It sends the event <package name>.heads_up.",
       "group": "From Other Modules",
       "items": {
         "type": "object",
@@ -98,7 +102,8 @@
       "format": "lan-url",
       "default": "",
       "title": "Address to Watch",
-      "description": "Optional. A web address, at home or on the internet, that gives a text. The text is shown when it changes; the first one after a start is not. Empty: not used.",
+      "description": "Optional. A web address that gives a text, shown when it changes.",
+      "help": "The address can be at home or on the internet. The text is shown when it changes; the first one after a start is not. Empty: not used.",
       "group": "From a Watched Address"
     },
     "watch_seconds": {
