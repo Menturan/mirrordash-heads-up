@@ -1,6 +1,6 @@
 [project]
 name = "mirrordash-heads-up"
-version = "1.2.0"
+version = "1.2.1"
 description = "A short text in the centre of the mirror for a few seconds, sent by your home automation: someone at the door, the laundry is done."
 requires-python = ">=3.14"
 license = "MIT"  # LICENSE: yours to change; the template it came from asks nothing (MIT-0)
