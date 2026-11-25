@@ -13,6 +13,11 @@
             heads-up-out calc(var(--fade) * var(--slow) * 1s) ease-in calc((var(--seconds) - var(--margin) - var(--fade) * var(--slow)) * 1s) forwards;
     }
     .heads-up-long { font-size: 44px; line-height: 1.2; }  /* a long text, a step below display-lg */
+    /* The card has a definite width: on a narrow one the text steps down with it instead of breaking every word */
+    @container (max-width: 30rem) {
+        .heads-up.display-lg, .heads-up.display-xl { font-size: clamp(28px, 10cqi, 48px); }
+        .heads-up.heads-up-long { font-size: clamp(22px, 7cqi, 36px); }
+    }
     @media (prefers-reduced-motion: reduce) { .heads-up { --slow: 2; --rise: 0px; } }
     @keyframes heads-up-in  { from { opacity: 0; transform: translateY(var(--rise)); } to { opacity: 1; transform: none; } }
     @keyframes heads-up-out { from { opacity: 1; } to { opacity: 0; } }

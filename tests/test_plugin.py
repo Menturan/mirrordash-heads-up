@@ -212,3 +212,8 @@ def test_the_settings_have_bounds_and_defaults_inside_them():
 
 def test_the_entity_is_a_text_with_control_at_the_platforms_limit():
     assert SCHEMA["exposes"]["heads_up"] == {"type": "text", "title": "Heads-up", "maxLength": 255, "control": True}
+
+
+def test_the_card_width_is_a_preferred_width_not_a_module_default():
+    assert SCHEMA["preferred_width"] == "40rem"
+    assert "width_percent" not in SCHEMA["properties"] and "height_percent" not in SCHEMA["properties"]
