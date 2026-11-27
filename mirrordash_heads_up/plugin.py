@@ -45,7 +45,7 @@ class HeadsUpModule:
         self.router = web.make_router(self)
         event_bus = config.get("event_bus")  # not there in a test
         if event_bus and not self.preview:
-            events.listen(event_bus, config.get("senders", []), self.push)
+            events.listen(event_bus, config.get("any_sender", True), config.get("allowed_senders", []), self.push)
 
     # ── The queue ──
     def push(self, text, seconds=None) -> bool:

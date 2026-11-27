@@ -68,9 +68,9 @@ it.
 
 ### From other modules
 
-Under **Modules that may send**, add the package name of each module whose heads-ups you want, for example
-`mirrordash_now_playing_spotify`. That module must be installed and set to send. The convention for module authors:
-publish the event `<your_package>.heads_up` with a text and, optionally, seconds:
+By default **Any module may send** is on: the heads-ups of every installed module are shown. Switch it off and tick
+the modules you want under **Modules that may send**; a module installed later stays off until you tick it. The
+convention for module authors: publish the event `<your_package>.heads_up` with a text and, optionally, seconds:
 
 ```python
 event_bus = config.get("event_bus")  # not there in a test
@@ -78,7 +78,7 @@ if event_bus:
     event_bus.publish(f"{self.name}.heads_up", {"text": "Door open", "seconds": 10}, public=True)
 ```
 
-Only the listed packages are heard, and their data is checked (a text, and seconds from 3 to 120).
+Whoever sends, the data is checked (a text, and seconds from 3 to 120).
 
 ### At set times
 

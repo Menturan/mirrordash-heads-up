@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Heads-up",
-  "requires_mirrordash": "0.21",
+  "requires_mirrordash": "0.21.1",
   "preferred_width": "40rem",
   "description": "A short text in the centre of the mirror for a few seconds: someone at the door, the laundry is done.",
   "help": "It can come from your home automation, a web call, another module, a schedule or a watched web address.",
@@ -43,26 +43,20 @@
       "description": "Password for sending heads-ups. Empty: anyone on your home network can send one.",
       "help": "Empty: anyone on your home network can send a heads-up to http://mirrordash.local/api/modules/<name>/show (the name is shown on this module's card in the admin). With a token set, every call must carry it, in an X-Token header or a token address parameter."
     },
-    "senders": {
+    "any_sender": {
+      "type": "boolean",
+      "default": true,
+      "title": "Any module may send",
+      "description": "Show heads-ups from every installed module.",
+      "help": "Switch off to choose the modules yourself. A module sends the event <package name>.heads_up."
+    },
+    "allowed_senders": {
       "type": "array",
       "default": [],
       "title": "Modules that may send",
-      "description": "Other modules whose heads-ups are shown, by package name.",
-      "help": "Add each one's package name, for example mirrordash_now_playing_spotify; that module must be installed and set to send. It sends the event <package name>.heads_up.",
-      "items": {
-        "type": "object",
-        "title": "Module",
-        "required": ["package"],
-        "properties": {
-          "package": {
-            "type": "string",
-            "default": "",
-            "title": "Package name",
-            "pattern": "[A-Za-z_][A-Za-z0-9_]*",
-            "pattern_message": "A Python package name: letters, digits and underscores, such as mirrordash_now_playing_spotify"
-          }
-        }
-      }
+      "description": "A module installed later is off until you tick it.",
+      "items": {"type": "string", "enum_source": "installed_modules"},
+      "show_if": {"any_sender": [false]}
     },
     "timed": {
       "type": "array",

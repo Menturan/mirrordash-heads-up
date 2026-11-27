@@ -68,20 +68,35 @@ async def test_seconds_come_from_the_body_or_the_query_inside_the_bounds():
 
 # ── Other modules ──
 
-def test_it_listens_to_exactly_the_listed_packages_and_ignores_bad_names():
+def test_any_sender_subscribes_once_to_the_wildcard():
     bus = MagicMock()
-    names = listen(bus, [{"package": "mirrordash_a"}, {"package": " mirrordash_b "}, {"package": "bad.name"},
-                         {"package": "a b"}, {"package": ""}, {"package": "mirrordash_a"}, "text", {}], print)
+    assert listen(bus, True, ["mirrordash_a"], print) == ["*.heads_up"]
+    assert [call.args[0] for call in bus.subscribe.call_args_list] == ["*.heads_up"]
+
+
+def test_otherwise_it_listens_to_exactly_the_ticked_packages_and_ignores_bad_names():
+    bus = MagicMock()
+    names = listen(bus, False, ["mirrordash_a", " mirrordash_b ", "bad.name", "a b", "", "mirrordash_a", 5], print)
     assert names == ["mirrordash_a.heads_up", "mirrordash_b.heads_up"]
     assert [call.args[0] for call in bus.subscribe.call_args_list] == names
 
 
+def test_nothing_ticked_subscribes_to_nothing():
+    bus = MagicMock()
+    assert listen(bus, False, [], print) == []
+    bus.subscribe.assert_not_called()
+
+
 def test_the_module_subscribes_in_init_but_not_in_the_preview():
     bus = MagicMock()
-    make_module(event_bus=bus, senders=[{"package": "mirrordash_a"}])
+    make_module(event_bus=bus)  # any_sender defaults to on
     bus.subscribe.assert_called_once()
+    assert bus.subscribe.call_args.args[0] == "*.heads_up"
+    ticked = MagicMock()
+    make_module(event_bus=ticked, any_sender=False, allowed_senders=["mirrordash_a"])
+    assert ticked.subscribe.call_args.args[0] == "mirrordash_a.heads_up"
     other = MagicMock()
-    make_module(event_bus=other, senders=[{"package": "mirrordash_a"}], preview=True)
+    make_module(event_bus=other, preview=True)
     other.subscribe.assert_not_called()
 
 
